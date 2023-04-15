@@ -1,0 +1,27 @@
+body{
+    background-color: wheat;
+};
+
+#top {
+    text-align: center;
+}
+
+.container{
+    text-align: center;
+}
+
+#top h1{
+    font-size: 30px;
+    color: gray;
+    text-align: center;
+    padding: 2%;
+}
+
+.color{
+    width: 90px;
+    height: 100px;
+    margin: 1%;
+    border: 1px solid black;
+    display: inline-block;    
+}
+
