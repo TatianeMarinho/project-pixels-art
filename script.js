@@ -21,21 +21,34 @@ const createGridPalette = () => {
   }
 };
 createGridPalette();
-// estilizando a class color
+
 const classColor = document.getElementsByClassName('color');
-let color = ['papayawhip', 'lawngreen', 'indigo', 'khaki'];
+
+// 3 - Adicione a cor preta como a primeira cor da paleta de cores
+const fixedBlack = () => {
+  const idColor = document.getElementById(0);
+  idColor.style.backgroundColor = 'black';
+};
+fixedBlack();
+
+// estilizando a class color
+const createColor = () => {
+  const value = '0123456789ABCDEF';
+  let color = '#';
+
+  for (let i = 0; i < 6; i += 1) {
+    color += value[Math.floor(Math.random() * 16)];
+  };
+
+  return (color !== 'FFFFFF' ? color : createColor());
+};
 
 const styleColor = () => {
   for (let i = 1; i < classColor.length; i += 1) {
     const idColor = document.getElementById(i);
-    idColor.style.backgroundColor = color[i];
+    idColor.style.backgroundColor = createColor();
   }
 };
 styleColor();
 
-//3 - Adicione a cor preta como a primeira cor da paleta de cores
-const fixedBlack = () => {
-  const idColor = document.getElementById(0);
-  idColor.style.backgroundColor = "black";
-};
-fixedBlack();
+// 4 - Adicione um botão para gerar cores aleatórias para a paleta de cores
