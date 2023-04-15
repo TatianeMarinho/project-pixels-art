@@ -26,10 +26,16 @@ const classColor = document.getElementsByClassName('color');
 let color = ['papayawhip', 'lawngreen', 'indigo', 'khaki'];
 
 const styleColor = () => {
-  for (let i = 0; i < classColor.length; i += 1) {
-    let idColor = document.getElementById(i);
+  for (let i = 1; i < classColor.length; i += 1) {
+    const idColor = document.getElementById(i);
     idColor.style.backgroundColor = color[i];
   }
 };
 styleColor();
 
+//3 - Adicione a cor preta como a primeira cor da paleta de cores
+const fixedBlack = () => {
+  const idColor = document.getElementById(0);
+  idColor.style.backgroundColor = "black";
+};
+fixedBlack();
