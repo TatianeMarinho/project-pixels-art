@@ -31,30 +31,6 @@ const fixedBlack = () => {
 };
 fixedBlack();
 
-
-
-// estilizando a class color
-const createColor = () => {
-  const value = '0123456789ABCDEF';
-  let color = '#';
-
-  for (let i = 0; i < 6; i += 1) {
-    color += value[Math.floor(Math.random() * 16)];
-  };
-
-  return (color !== 'FFFFFF' ? color : createColor());
-};
-
-const styleColor = () => {
-  for (let i = 1; i < classColor.length; i += 1) {
-    const idColor = document.getElementById(i);
-    idColor.style.backgroundColor = createColor();
-  }
-};
-styleColor();
-
-/* loadLocalStorage !== null ? loadLocalStorage : styleColor();  nao esquecer de parar de chamar a funcao quando ja tiver um saveLocalStorage para iniciar a pagina */
-
 // Implemente uma função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página
 const idUm = document.getElementById('1');
 const idDois = document.getElementById('2');
@@ -67,13 +43,68 @@ const savePalette = (um, dois, tres) => {
     colorTres: tres.style.backgroundColor,
   };
 
-  localStorage.setItem('paleta',JSON.stringify(backg));
+  localStorage.setItem('colorPalette', JSON.stringify(backg));
+};
+
+const loadPalette = (um, dois, tres) => {
+  const backg = JSON.parse(localStorage.getItem('colorPalette'));
+  um.style.backgroundColor = backg.colorUm;
+  dois.style.backgroundColor = backg.colorDois;
+  tres.style.backgroundColor = backg.colorTres;
+};
+
+// estilizando a class color
+const createColor = () => {
+  const value = '0123456789ABCDEF';
+  let color = '#';
+
+  for (let i = 0; i < 6; i += 1) {
+    color += value[Math.floor(Math.random() * 16)];
+  }
+
+  return (color !== 'FFFFFF' ? color : createColor());
+};
+
+const styleColor = () => {
+  for (let i = 1; i < classColor.length; i += 1) {
+    const idColor = document.getElementById(i);
+    idColor.style.backgroundColor = createColor();
+  }
+  savePalette(idUm, idDois, idTres);
+};
+
+window.onload = () => {
+  if (localStorage.getItem('colorPalette')) {
+    loadPalette(idUm, idDois, idTres);
+  } else {
+    styleColor();
+  }
 };
 
 // 4 - Adicione um botão para gerar cores aleatórias para a paleta de cores
-const buttomPalette = document.getElementById('button-random-color');
-buttomPalette.addEventListener('click', styleColor);
-savePalette(idUm, idDois, idTres);
+const buttonPalette = () => {
+  const buttomPalette = document.getElementById('button-random-color');
+  buttomPalette.addEventListener('click', styleColor);
+};
+buttonPalette();
+
+// 6 - Adicione à página um quadro contendo 25 pixels
+const pixelBoard = document.getElementById('pixel-board');
+
+const pixel25 = () => {
+  for (let l = 0; l < 5; l += 1) {
+    for (let c = 0; c < 5; c += 1) {
+      const div = document.createElement('div');
+
+      div.className = 'pixel';
+      // eslint-disable-next-line no-useless-concat
+      div.id = 'l' + 'c';
+
+      pixelBoard.appendChild(div);
+    }
+
+  }
+};
+pixel25();
 
 
-const loadLocalStorage = null;
