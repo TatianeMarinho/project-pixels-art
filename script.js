@@ -15,7 +15,11 @@ const createGridPalette = () => {
   for (let i = 0; i < 4; i += 1) {
     const div = document.createElement('div');
 
-    div.className = 'color';
+    if (i === 0) {
+      div.className = 'selected color';
+    } else {
+      div.className = 'color';
+    }
     div.id = i;
     colorPalette.appendChild(div);
   }
@@ -23,11 +27,13 @@ const createGridPalette = () => {
 createGridPalette();
 
 const classColor = document.getElementsByClassName('color');
+const id0 = document.getElementById(0);
+
+
 
 // 3 - Adicione a cor preta como a primeira cor da paleta de cores
 const fixedBlack = () => {
-  const idColor = document.getElementById(0);
-  idColor.style.backgroundColor = 'black';
+  id0.style.backgroundColor = '#000000';
 };
 fixedBlack();
 
@@ -62,7 +68,10 @@ const createColor = () => {
     color += value[Math.floor(Math.random() * 16)];
   }
 
-  return (color !== 'FFFFFF' ? color : createColor());
+  if (color !== '#FFFFFF' || color !== '#000000') {
+    return color;
+  }
+  return createColor;
 };
 
 const styleColor = () => {
@@ -92,17 +101,13 @@ buttonPalette();
 const pixelBoard = document.getElementById('pixel-board');
 
 const pixel25 = () => {
-  for (let l = 0; l < 5; l += 1) {
-    for (let c = 0; c < 5; c += 1) {
-      const div = document.createElement('div');
+  for (let i = 0; i < 25; i += 1) {
+    const div = document.createElement('div');
 
-      div.className = 'pixel';
-      // eslint-disable-next-line no-useless-concat
-      div.id = 'l' + 'c';
+    div.className = 'pixel';
+    div.id = i;
 
-      pixelBoard.appendChild(div);
-    }
-
+    pixelBoard.appendChild(div);
   }
 };
 pixel25();
