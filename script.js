@@ -31,6 +31,8 @@ const fixedBlack = () => {
 };
 fixedBlack();
 
+
+
 // estilizando a class color
 const createColor = () => {
   const value = '0123456789ABCDEF';
@@ -51,4 +53,27 @@ const styleColor = () => {
 };
 styleColor();
 
+/* loadLocalStorage !== null ? loadLocalStorage : styleColor();  nao esquecer de parar de chamar a funcao quando ja tiver um saveLocalStorage para iniciar a pagina */
+
+// Implemente uma função usando localStorage para que a paleta de cores gerada aleatoriamente seja mantida após recarregar a página
+const idUm = document.getElementById('1');
+const idDois = document.getElementById('2');
+const idTres = document.getElementById('3');
+
+const savePalette = (um, dois, tres) => {
+  const backg = {
+    colorUm: um.style.backgroundColor,
+    colorDois: dois.style.backgroundColor,
+    colorTres: tres.style.backgroundColor,
+  };
+
+  localStorage.setItem('paleta',JSON.stringify(backg));
+};
+
 // 4 - Adicione um botão para gerar cores aleatórias para a paleta de cores
+const buttomPalette = document.getElementById('button-random-color');
+buttomPalette.addEventListener('click', styleColor);
+savePalette(idUm, idDois, idTres);
+
+
+const loadLocalStorage = null;
