@@ -15,11 +15,7 @@ const createGridPalette = () => {
   for (let i = 0; i < 4; i += 1) {
     const div = document.createElement('div');
 
-    if (i === 0) {
-      div.className = 'selected color';
-    } else {
-      div.className = 'color';
-    }
+    div.className = 'color';
     div.id = i;
     colorPalette.appendChild(div);
   }
@@ -112,4 +108,19 @@ const pixel25 = () => {
 };
 pixel25();
 
+// 8 - Defina a cor preta como cor inicial da paleta de cores
+classColor[0].classList.add('selected');
 
+// 9 - Crie uma função para selecionar uma cor na paleta de cores
+const selectColor = () => {
+  for (let i = 0; i < classColor.length; i += 1) {
+    classColor[i].addEventListener('click', (event) => {
+      const selected = document.querySelector('.selected');
+      selected.classList.remove('selected');
+      event.target.classList.add('selected');
+    });
+  }
+};
+selectColor();
+
+// 10 - Crie uma função que permita preencher um pixel do quadro com a cor selecionada na paleta de cores
