@@ -25,8 +25,6 @@ createGridPalette();
 const classColor = document.getElementsByClassName('color');
 const id0 = document.getElementById(0);
 
-
-
 // 3 - Adicione a cor preta como a primeira cor da paleta de cores
 const fixedBlack = () => {
   id0.style.backgroundColor = '#000000';
@@ -123,6 +121,15 @@ const selectColor = () => {
 };
 selectColor();
 
+// 12 - Crie uma função para salvar e recuperar o seu desenho atual no localStorage
+const savePixel = (pixel) => {
+  let pixelBoard = {};
+  for (const elemento of pixel) {
+    pixelBoard[elemento] = elemento.style.backgroundColor;
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(pixelBoard));
+};
+
 // 10 - Crie uma função que permita preencher um pixel do quadro com a cor selecionada na paleta de cores
 const pixel = document.querySelectorAll('.pixel');
 const colorPixel = () => {
@@ -131,7 +138,9 @@ const colorPixel = () => {
       const selected = document.querySelector('.selected');
       p.style.backgroundColor = selected.style.backgroundColor;
     });
+    
   }
+  savePixel(pixel);
 };
 colorPixel();
 
@@ -145,3 +154,5 @@ const buttomClean = () => {
   }
 };
 buttomClean();
+
+
