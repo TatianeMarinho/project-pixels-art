@@ -124,3 +124,19 @@ const selectColor = () => {
 selectColor();
 
 // 10 - Crie uma função que permita preencher um pixel do quadro com a cor selecionada na paleta de cores
+const pixel = document.querySelectorAll('.pixel');
+const e = () => {
+  
+  const colorSelected = `${selected.style.backgroundColor}`;
+  e.target.style.backgroundColor = `${colorSelected}`;
+};
+
+const colorPixel = () => {
+  for (let p of pixel) {
+    p.addEventListener('click', (event) => {
+     const selected = document.querySelector('.selected');
+     p.style.backgroundColor = selected.style.backgroundColor;
+    });
+  }
+};
+colorPixel();
