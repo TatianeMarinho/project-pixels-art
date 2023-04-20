@@ -121,27 +121,28 @@ const selectColor = () => {
 };
 selectColor();
 
-// 12 - Crie uma função para salvar e recuperar o seu desenho atual no localStorage
-const savePixel = (pixel) => {
-  let pixelBoard = {};
-  for (const elemento of pixel) {
-    pixelBoard[elemento] = elemento.style.backgroundColor;
-  }
-  localStorage.setItem('pixelBoard', JSON.stringify(pixelBoard));
-};
+
+const pixel = document.querySelectorAll('.pixel');
+//parte da 12
+let styleBackground = [];
+
 
 // 10 - Crie uma função que permita preencher um pixel do quadro com a cor selecionada na paleta de cores
-const pixel = document.querySelectorAll('.pixel');
 const colorPixel = () => {
-  for (const p of pixel) {
-    p.addEventListener('click', () => {
-      const selected = document.querySelector('.selected');
-      p.style.backgroundColor = selected.style.backgroundColor;
-    });
-    
+  for (element of pixel) {
+    element.addEventListener('click', (e) => {
+    const selected = document.querySelector('.selected');
+    const pixelColor = selected.style.backgroundColor;
+    e.target.style.backgroundColor = pixelColor;
+
+//parte da 12
+    const idPixel = e.target.id;
+    styleBackground.push([idPixel, pixelColor]);
+    localStorage.setItem('pixelBoard', JSON.stringify(styleBackground));
+    })
   }
-  savePixel(pixel);
 };
+
 colorPixel();
 
 // 11 - Crie um botão que retorne a cor do quadro para a cor inicial
@@ -150,9 +151,24 @@ const buttomClean = () => {
   for (const p of pixel) {
     clearBoard.addEventListener('click', () => {
       p.style.backgroundColor = '#FFFFFF';
+      localStorage.removeItem('pixelBoard');
     });
   }
+
 };
 buttomClean();
 
-
+// 12 - Crie uma função para salvar e recuperar o seu desenho atual no localStorage
+const loadPixelBackground = () => {
+  const loadBack = JSON.parse(localStorage.getItem('pixelBoard'));
+  if(loadBack !== null) {
+    for(let i = 0; i < loadBack.length; i += 1) {
+      const pixelId = loadBack[i][0];
+      const pixelBack = loadBack[i][1];
+      
+      pixel[pixelId].style.backgroundColor = pixelBack;
+    }
+    styleBackground = loadBack;
+  }
+};
+loadPixelBackground();
